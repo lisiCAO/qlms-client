@@ -41,7 +41,7 @@ const TenantDashboard = () => {
           </h1>
           {/* TODO: replace with rental amount and payment due day, if tenant has a lease, otherwise, d-none */}
           <p style={{ textAlign: "center" }}>
-            Your next payment of $1000 is due on 01/01/2022 
+            Your next payment of $1000 is due on 01/01/2022
           </p>
         </div>
       </Container>

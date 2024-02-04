@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Modal, Carousel, Table, Badge, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import { Modal, Carousel, Table, Badge, Button } from "react-bootstrap";
 
 const PropertyDetailModal = ({ show, onHide, property }) => {
   const [photos, setPhotos] = useState([]);
@@ -11,7 +11,7 @@ const PropertyDetailModal = ({ show, onHide, property }) => {
         const data = await response.json();
         setPhotos(data);
       } catch (error) {
-        console.error('Error fetching photos:', error);
+        console.error("Error fetching photos:", error);
       }
     };
 
@@ -21,7 +21,13 @@ const PropertyDetailModal = ({ show, onHide, property }) => {
   }, [property]);
 
   return (
-    <Modal show={show} onHide={onHide} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
+    <Modal
+      show={show}
+      onHide={onHide}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           Property Details
@@ -30,7 +36,6 @@ const PropertyDetailModal = ({ show, onHide, property }) => {
       <Modal.Body>
         {property ? (
           <>
-
             {photos.length > 0 ? (
               <Carousel>
                 {photos.map((photo, index) => (
@@ -83,7 +88,13 @@ const PropertyDetailModal = ({ show, onHide, property }) => {
                 <tr>
                   <td>Status</td>
                   <td>
-                    <Badge bg={property.status === 'available' ? 'success' : 'secondary'}>
+                    <Badge
+                      bg={
+                        property.status === "available"
+                          ? "success"
+                          : "secondary"
+                      }
+                    >
                       {property.status}
                     </Badge>
                   </td>
@@ -97,7 +108,7 @@ const PropertyDetailModal = ({ show, onHide, property }) => {
                   <td>{property.description}</td>
                 </tr>
                 {/* Display owners if available */}
-                {/* You would need to fetch owner details from the property.owner_user_id */}
+                {/* TODO: fetch owner details from the property.owner_user_id */}
               </tbody>
             </Table>
           </>

@@ -7,30 +7,29 @@ import ApiService from "../../services/ApiService";
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const refreshUserData = async () => {
     try {
-      setLoading(true); 
+      setLoading(true);
       const data = await ApiService.fetchProfile();
-      setUserData(data); 
-      setError(''); 
+      setUserData(data);
+      setError("");
     } catch (error) {
-      console.error('Error fetching user data:', error);
-      setError('Failed to fetch user data');
+      console.error("Error fetching user data:", error);
+      setError("Failed to fetch user data");
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    refreshUserData(); 
+    refreshUserData();
   }, []);
 
   if (loading) {
     return <div>Loading...</div>;
   }
-
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -49,7 +48,10 @@ const UserProfile = () => {
           <Typography variant="h4">Account</Typography>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={4}>
-              <AccountProfile userData={userData} refreshUserData={refreshUserData} />
+              <AccountProfile
+                userData={userData}
+                refreshUserData={refreshUserData}
+              />
             </Grid>
             <Grid item xs={12} md={6} lg={8}>
               <AccountProfileDetails userData={userData} />

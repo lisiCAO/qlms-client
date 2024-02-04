@@ -1,5 +1,5 @@
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
 
 const Footer = () => (
   <Container fluid className="bg-dark text-white text-center p-3">

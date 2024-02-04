@@ -12,17 +12,16 @@ import ApiService from "../../../services/ApiService";
 
 const DashboardPropertiesCount = () => {
   const [value, setValue] = useState([]);
-  
+
   useEffect(() => {
-    ApiService.fetchLandlordDashboard() 
+    ApiService.fetchLandlordDashboard()
       .then((data) => {
         setValue(data.propertiesCount[0].propertiesCount);
       })
       .catch((error) => {
-        console.error('Error fetching DashboardPropertiesCount:', error);
+        console.error("Error fetching DashboardPropertiesCount:", error);
       });
   }, []);
-
 
   return (
     <Card>

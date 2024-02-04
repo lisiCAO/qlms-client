@@ -19,7 +19,12 @@ const Topbar = () => {
 
   return (
     <>
-      <Navbar bg="light" expand="lg" className="d-flex align-items-center justify-content-between p-3" style={{ height: '60px' }}> 
+      <Navbar
+        bg="light"
+        expand="lg"
+        className="d-flex align-items-center justify-content-between p-3"
+        style={{ height: "60px" }}
+      >
         <Navbar.Brand as={Link} to="/landlord">
           Dashboard
         </Navbar.Brand>
@@ -29,14 +34,14 @@ const Topbar = () => {
             <FaSearch />
           </Button>
         </Form>
-        <Nav >
+        <Nav>
           <div className="d-flex align-items-center">
-          <Nav.Link as={Link} to="/landlord/profile">
-            {user?.username}
-          </Nav.Link>
-          <Button variant="link" onClick={handleShowLogoutModal} >
-            <FaSignOutAlt />
-          </Button>
+            <Nav.Link as={Link} to="/landlord/profile">
+              {user?.username}
+            </Nav.Link>
+            <Button variant="link" onClick={handleShowLogoutModal}>
+              <FaSignOutAlt />
+            </Button>
           </div>
         </Nav>
       </Navbar>
@@ -50,4 +55,3 @@ const Topbar = () => {
 };
 
 export default Topbar;
-

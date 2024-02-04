@@ -91,7 +91,12 @@ const AuthPage = () => {
             Search our tutorials and view our most frequently asked questions
             and support articles.
           </p>
-          <Button variant="outline-primary" className="btn-custom" as={Link} to="/about-us">
+          <Button
+            variant="outline-primary"
+            className="btn-custom"
+            as={Link}
+            to="/about-us"
+          >
             Visit The Help Center
           </Button>
         </Col>

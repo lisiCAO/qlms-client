@@ -1,5 +1,5 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 import LeaseList from "./../../../components/landlord/leases/LeaseList";
 import LeaseCreate from "./../../../components/landlord/leases/LeaseCreate";
 // import LeaseEdit from "./../../../components/landlord/leases/LeaseEdit";
@@ -12,7 +12,7 @@ const LeasePage = () => {
         <Route index element={<LeaseList />} />
         <Route path="create" element={<LeaseCreate />} />
         {/* <Route path="edit/:id" element={<LeaseEdit />} /> We would not offer edit option */}
-        <Route path="delete/:id" element={<LeaseDelete />} /> 
+        <Route path="delete/:id" element={<LeaseDelete />} />
       </Routes>
     </div>
   );

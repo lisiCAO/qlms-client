@@ -53,8 +53,7 @@ function App() {
           </Route>
         </Route>
         <Route path="/about-us" element={<AboutUs />} />
-      
-       
+
         {/* Catch all route */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

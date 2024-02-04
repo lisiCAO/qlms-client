@@ -25,7 +25,7 @@ export const DashboardPropertiesList = (props) => {
         setProperties(data.propertiesResult);
       })
       .catch((error) => {
-        console.error('Error fetching DashboardPropertiesList:', error);
+        console.error("Error fetching DashboardPropertiesList:", error);
       });
   }, []);
 
@@ -60,7 +60,11 @@ export const DashboardPropertiesList = (props) => {
       <CardActions sx={{ justifyContent: "flex-end" }}>
         <Button
           color="inherit"
-          endIcon={<SvgIcon fontSize="small"><ArrowRightIcon /></SvgIcon>}
+          endIcon={
+            <SvgIcon fontSize="small">
+              <ArrowRightIcon />
+            </SvgIcon>
+          }
           size="small"
           variant="text"
         >

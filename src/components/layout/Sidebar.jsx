@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Accordion, Button, Modal} from "react-bootstrap";
-import { House, Briefcase, People, PlusCircle, PersonCircle } from "react-bootstrap-icons";
+import { Accordion, Button, Modal } from "react-bootstrap";
+import {
+  House,
+  Briefcase,
+  People,
+  PlusCircle,
+  PersonCircle,
+} from "react-bootstrap-icons";
 import Image from "react-bootstrap/Image";
 import Nav from "react-bootstrap/Nav";
 import { useAuth } from "../../context/AuthContext";
@@ -10,7 +16,6 @@ import "./Sidebar.scss";
 const LogoImage = process.env.PUBLIC_URL + "/logo.png";
 
 const Sidebar = () => {
-
   const { user } = useAuth();
   const [username, setUsername] = useState("Guest");
   const [profileImage, setProfileImage] = useState("");
@@ -98,11 +103,7 @@ const Sidebar = () => {
           </Accordion.Header>
           <Accordion.Body>
             <Nav className="flex-column">
-              <Nav.Link
-                as={Link}
-                to="/landlord/tenants"
-                className="d-block"
-              >
+              <Nav.Link as={Link} to="/landlord/tenants" className="d-block">
                 Overview
               </Nav.Link>
               <Nav.Link
@@ -119,7 +120,6 @@ const Sidebar = () => {
 
       {/* User Information at the Bottom */}
       <div className="sidebar-footer mt-auto mb-3 text-center">
-
         {profileImage ? (
           <Image
             src={profileImage}

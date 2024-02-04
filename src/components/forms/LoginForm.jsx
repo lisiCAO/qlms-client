@@ -9,10 +9,9 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(null);
   const [success, setSuccess] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const { login, user } = useAuth();
-
 
   useUnloadMessage(setMessage, setSuccess);
 
@@ -24,8 +23,7 @@ const LoginForm = () => {
       setSuccess("Logged in successfully");
       setTimeout(() => {
         setSuccess(false);
-      }
-      , 2000);
+      }, 2000);
     } catch (error) {
       setMessage("Credentials are incorrect. Please try again!");
     }
@@ -33,15 +31,15 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (user) {
-      if (user.role === 'landlord') {
-        navigate('/landlord/properties');
-      } else if (user.role === 'tenant') {
-        navigate('/tenant/dashboard');
+      if (user.role === "landlord") {
+        navigate("/landlord/properties");
+      } else if (user.role === "tenant") {
+        navigate("/tenant/dashboard");
       } else {
-        navigate('/');
+        navigate("/");
       }
     }
-  }, [user]); 
+  }, [user,navigate]);
 
   return (
     <div className="container">

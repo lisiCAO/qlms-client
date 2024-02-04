@@ -1,39 +1,41 @@
-import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import React from "react";
+import { Container, Row, Col, Card } from "react-bootstrap";
 
 const features = [
-  { 
-    title: "Real-Time Interaction", 
-    description: "Our platform facilitates real-time interaction...", 
-    icon: "/real-time-interaction.webp" 
-  },
-  { 
-    title: "Financial Processing Capabilities", 
-    description: "QLMS is equipped with robust financial processing capabilities...", 
-    icon: "/financial-processing.webp" 
+  {
+    title: "Real-Time Interaction",
+    description: "Our platform facilitates real-time interaction...",
+    icon: "/real-time-interaction.webp",
   },
   {
-    title: "Property Management", 
-    description: "Our platform is designed to streamline property management...", 
-    icon: "/property-management.webp" 
+    title: "Financial Processing Capabilities",
+    description:
+      "QLMS is equipped with robust financial processing capabilities...",
+    icon: "/financial-processing.webp",
   },
   {
-    title: "Tenant Management", 
-    description: "QLMS is equipped with a tenant management system...", 
-    icon: "/tenant-management.webp" 
+    title: "Property Management",
+    description:
+      "Our platform is designed to streamline property management...",
+    icon: "/property-management.webp",
   },
   {
-    title: "Document Management", 
-    description: "Our platform is designed to streamline document management...", 
-    icon: "/document-management.webp" 
+    title: "Tenant Management",
+    description: "QLMS is equipped with a tenant management system...",
+    icon: "/tenant-management.webp",
   },
   {
-    title: "Data Security", 
-    description: "QLMS is equipped with robust data security features...", 
-    icon: "/data-security.webp" 
-  }
+    title: "Document Management",
+    description:
+      "Our platform is designed to streamline document management...",
+    icon: "/document-management.webp",
+  },
+  {
+    title: "Data Security",
+    description: "QLMS is equipped with robust data security features...",
+    icon: "/data-security.webp",
+  },
 ];
-
 
 const FeaturesSection = () => (
   <Container className="my-5">

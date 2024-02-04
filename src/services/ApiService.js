@@ -1,17 +1,6 @@
 const API_BASE_URL = "http://localhost:8000";
 
 const ApiService = {
-  /* Posts */
-  async createProperty(formData) {
-    const response = await fetch(`${API_BASE_URL}/api/properties`, {
-      method: 'POST',
-      body: formData,
-      credentials: 'include',
-    });
-    const data = await handleResponse(response);
-    return data;
-  },
-
   /* Auth */
   async login(credentials) {
     const response = await fetchWithConfig(`${API_BASE_URL}/auth/login`, {
@@ -29,9 +18,9 @@ const ApiService = {
 
   async logout() {
     const response = await fetchWithConfig(`${API_BASE_URL}/auth/logout`, {
-      method: "POST", 
+      method: "POST",
     });
-    const data = await handleResponse(response); 
+    const data = await handleResponse(response);
     return data;
   },
 
@@ -52,19 +41,12 @@ const ApiService = {
     const data = await handleResponse(response);
     return data;
   },
-  /* Leases */
-  async fetchLeases() {
-    const response = await fetchWithConfig(`${API_BASE_URL}/api/leases/landlord`, {
-      method: "GET"
-    });
-    const data = await handleResponse(response);
-    return data;
-  },
 
-  /* Tenants */
-  async fetchTenants() {
-    const response = await fetchWithConfig(`${API_BASE_URL}/api/tenants`, {
-      method: "GET"
+  async createProperty(formData) {
+    const response = await fetch(`${API_BASE_URL}/api/properties`, {
+      method: 'POST',
+      body: formData,
+      credentials: 'include',
     });
     const data = await handleResponse(response);
     return data;
@@ -107,12 +89,38 @@ const ApiService = {
     return data;
   },
 
+  async updateUser(userId, user) {
+    const response = await fetchWithConfig(`${API_BASE_URL}/api/users/${userId}`, {
+      method: "PUT",
+      body: JSON.stringify(user),
+    });
+    const data = await handleResponse(response);
+    return data;
+  },
+
+  /* Tenants */
+  async fetchTenants() {
+    const response = await fetchWithConfig(`${API_BASE_URL}/api/properties/userinfo`, {
+      method: "GET"
+    });
+    const data = await handleResponse(response);
+    return data;
+  },
+
   /* Leases */
   async createLease(lease) {
     const response = await fetchWithConfig(`${API_BASE_URL}/api/leases`, {
       method: 'POST',
       body: JSON.stringify(lease),
       credentials: 'include',
+    });
+    const data = await handleResponse(response);
+    return data;
+  },
+
+  async fetchLeases() {
+    const response = await fetchWithConfig(`${API_BASE_URL}/api/leases/landlord`, {
+      method: "GET"
     });
     const data = await handleResponse(response);
     return data;
@@ -129,7 +137,7 @@ const ApiService = {
     return data;
   },
 
-  // other APIs
+  // Other APIs
 
 };
 
@@ -154,7 +162,6 @@ const handleResponse = async (response) => {
       throw new Error(data.message || "An error occurred");
     }
   } else {
-    // non JSON response
     const text = await response.text();
     throw new Error(`Non-JSON response: ${text}`);
   }

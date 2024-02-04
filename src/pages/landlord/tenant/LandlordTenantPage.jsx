@@ -1,6 +1,6 @@
 // LandlordTenantPage.js
-import React from 'react';
-import { Routes, Route, Outlet } from 'react-router-dom';
+import React from "react";
+import { Routes, Route, Outlet } from "react-router-dom";
 import TenantsList from "./../../../components/landlord/tenants/TenantsList";
 // import TenantCreate from "./../../../components/landlord/tenants/TenantCreate"; {* We don't need this option because we are not creating a new tenant here. *}
 import TenantEdit from "./../../../components/landlord/tenants/TenantEdit";
@@ -15,7 +15,7 @@ const LandlordTenantPage = () => {
         <Route path="edit/:id" element={<TenantEdit />} />
         <Route path="delete/:id" element={<TenantDelete />} />
       </Routes>
-      <Outlet /> 
+      <Outlet />
     </div>
   );
 };

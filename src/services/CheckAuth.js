@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 const CheckAuth = () => {
   const { user, isAuthInitialized } = useAuth();
   if (!isAuthInitialized) {
-    return null; // 或者 <LoadingIndicator />
+    return null; //  <LoadingIndicator />
   }
   console.log('User:', user);
   console.log('User role:', user?.role);

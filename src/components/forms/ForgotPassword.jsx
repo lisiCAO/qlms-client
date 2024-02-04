@@ -11,7 +11,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     try {
       await ApiService.forgotPassword(email);
-      // Handle success: Notify user to check their email
+      // Handle success: Notify user to check their email //TODO: Add notification
       navigate("/login"); // Optionally redirect user to login page
     } catch (error) {
       // Handle forgot password error

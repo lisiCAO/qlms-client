@@ -1,5 +1,5 @@
-import React from 'react';
-import { Routes, Route, Outlet } from 'react-router-dom';
+import React from "react";
+import { Routes, Route, Outlet } from "react-router-dom";
 import PropertyList from "./../../.././components/landlord/properties/PropertyList";
 import PropertyCreate from "./../../.././components/landlord/properties/PropertyCreate";
 import PropertyEdit from "./../../.././components/landlord/properties/PropertyEdit";

@@ -7,7 +7,7 @@ import { SearchProvider } from "./context/SearchContext";
 import { AuthProvider } from "./context/AuthContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
 const root = ReactDOM.createRoot(
-  document.getElementById('root') 
+  document.getElementById('root')
 );
 root.render(
   <React.StrictMode>

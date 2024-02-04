@@ -1,16 +1,16 @@
 /* Layout.scss */
 .landlord-layout {
-  display: flex; /* 设置Flexbox布局 */
-  height: 100vh; /* 整个布局占满视口高度 */
+  display: flex;
+  height: 100vh;
 }
 
 .landlord-content {
-  flex-grow: 1; /* 占据剩余空间 */
-  display: flex; /* 设置Flexbox布局 */
-  flex-direction: column; /* 子元素垂直排列 */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .dynamic-content {
-  flex-grow: 1; /* 填充剩余空间 */
-  overflow-y: auto; /* 如果内容超出高度，允许滚动 */
+  flex-grow: 1;
+  overflow-y: auto;
 }

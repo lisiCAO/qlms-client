@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
-import { Modal, Box, Button, Avatar, Typography, Card, CardActions, CardContent, Divider } from '@mui/material';
-import ApiService from '../../services/ApiService'; // 确保正确导入ApiService
+import React, { useState } from "react";
+import {
+  Modal,
+  Box,
+  Button,
+  Avatar,
+  Typography,
+  Card,
+  CardActions,
+  CardContent,
+  Divider,
+} from "@mui/material";
+import ApiService from "../../services/ApiService";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
+  bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
 };
@@ -16,7 +26,7 @@ const style = {
 const AccountProfile = ({ userData, refreshUserData }) => {
   const [open, setOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [preview, setPreview] = useState(userData.profile_picture_url || '');
+  const [preview, setPreview] = useState(userData.profile_picture_url || "");
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -28,33 +38,38 @@ const AccountProfile = ({ userData, refreshUserData }) => {
   };
   const handleUpload = async () => {
     const formData = new FormData();
-    formData.append('imagefile', selectedFile);
-  
+    formData.append("imagefile", selectedFile);
+
     try {
       const { fileUrl } = await ApiService.uploadImage(formData);
-      
-      if (fileUrl) {
 
+      if (fileUrl) {
         const updatedProfile = {
           profile_picture_url: fileUrl,
-          username: userData.username, 
-          email: userData.email, 
-          role: userData.role, 
+          username: userData.username,
+          email: userData.email,
+          role: userData.role,
         };
         await ApiService.updateProfile(userData.id, updatedProfile);
-        refreshUserData(); 
+        refreshUserData();
       }
     } catch (error) {
-      console.error('Error uploading image:', error);
+      console.error("Error uploading image:", error);
     }
-  
+
     handleClose();
   };
 
   return (
     <Card>
       <CardContent>
-        <Box sx={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
+        <Box
+          sx={{
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <Avatar src={preview} sx={{ height: 80, mb: 2, width: 80 }} />
           <Typography gutterBottom variant="h5">
             {userData.username}

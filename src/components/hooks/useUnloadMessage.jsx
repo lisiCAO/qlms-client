@@ -1,13 +1,11 @@
 import { useEffect } from "react";
 
-
 export function useUnloadMessage(setMessage, setSuccess = null) {
   useEffect(() => {
     const handleUnload = () => {
       setMessage(null);
       setSuccess(null);
     };
-    
 
     window.addEventListener("beforeunload", handleUnload);
     window.addEventListener("blur", handleUnload);

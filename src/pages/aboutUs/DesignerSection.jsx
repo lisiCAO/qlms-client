@@ -1,9 +1,13 @@
-import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import React from "react";
+import { Container, Row, Col, Card } from "react-bootstrap";
 
 const designers = [
   { name: "CAO, Lisi", role: "UI/UX Designer", image: "/developer4.webp" },
-  { name: "TANG, Shixin", role: "Algorithm Designer", image: "/developer1.webp" },
+  {
+    name: "TANG, Shixin",
+    role: "Algorithm Designer",
+    image: "/developer1.webp",
+  },
   { name: "LI, Zhi", role: "Graphic Designer", image: "/developer2.webp" },
 ];
 

@@ -28,26 +28,26 @@ export const AuthProvider = ({ children }) => {
     user,
     isAuthInitialized,
     login: async (credentials) => {
-    try {
-      const response = await ApiService.login(credentials);
-      console.log('Login response:', response);
-      setUser(response);
-      return response;
-    } catch (error) {
-      throw error;
-    }
-  }, 
-  logout: async () => {
-    try {
-      const response = await ApiService.logout();
-      setUser(null);
-      return response;
-    } catch (error) {
-      console.error('Logout failed:', error);
-      throw error;
-    }
-  },
-  isLoggedIn: !!user,
+      try {
+        const response = await ApiService.login(credentials);
+        console.log('Login response:', response);
+        setUser(response);
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    },
+    logout: async () => {
+      try {
+        const response = await ApiService.logout();
+        setUser(null);
+        return response;
+      } catch (error) {
+        console.error('Logout failed:', error);
+        throw error;
+      }
+    },
+    isLoggedIn: !!user,
   }), [user, isAuthInitialized]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
