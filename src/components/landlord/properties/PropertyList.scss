@@ -1,0 +1,41 @@
+.properties-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  .property-card {
+    flex: 0 1 calc(33.333% - 20px);
+    width: 100%;
+
+    &:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+      transform: scale(1.01); 
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    img {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+
+      .btn {
+        margin-top: auto;
+        margin-right: 5px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .property-card {
+      flex: 0 1 100%;
+    }
+  }
+}

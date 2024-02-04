@@ -1,0 +1,23 @@
+@import '../../assets/variables.scss';
+
+.sidebar {
+  background-color: $primary-color;
+  min-width: 180px;
+  color: $text-dark-color;
+  border-right: 1px solid $border-color;
+  font-family: $font-family-base;
+}
+
+.sidebar-logo {
+  padding: $spacing-base;
+  text-align: center;
+  color: $text-light-color;
+}
+
+.sidebar-footer {
+  bottom: 0;
+  width: 100%;
+  padding: $spacing-base;
+  color: $text-light-color;
+  text-align: center;
+}

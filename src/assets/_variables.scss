@@ -1,0 +1,29 @@
+// variables.scss
+$primary-color: #004085;
+$secondary-color: #adb5bd;
+$light-gray: #adb5bd;
+$background-color: #fff;
+$modal-shadow-color: rgba(0, 0, 0, 0.1);
+$text-light-color: #fff;
+$text-dark-color: #000;
+$link-color: #007bff;
+
+$font-family-base: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-size-base: 1rem; // 16px
+$font-size-lg: 1.5rem; // 24px
+$font-size-sm: 0.875rem; // 14px
+
+$spacing-base: 20px;
+$spacing-lg: 30px;
+$spacing-sm: 10px;
+
+$border-radius-base: 0.3rem;
+$border-color: #adb5bd;
+
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 1024px;
+$sidebar-width: 250px;
+
+// Z-index
+$zindex-modal-backdrop: 1040;
+$zindex-modal: 1050;

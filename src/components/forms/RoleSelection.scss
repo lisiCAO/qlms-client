@@ -1,0 +1,21 @@
+.role-selection {
+  max-width: 600px;
+  margin: 2rem auto;
+  text-align: center;
+
+  .card-body {
+    padding: 2rem;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem;
+    padding: 1rem;
+    font-size: 1rem;
+
+    .icon {
+      margin-right: 0.5rem;
+    }
+  }
+}
