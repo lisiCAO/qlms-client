@@ -123,6 +123,11 @@ const Registration = () => {
               {message}
             </div>
           )}
+          {success && (
+            <div className="alert alert-success" role="alert">
+              {success}
+            </div>
+           )}
           <Form.Group controlId="firstName" className="w-100 mb-3">
             <Form.Control
               type="text"

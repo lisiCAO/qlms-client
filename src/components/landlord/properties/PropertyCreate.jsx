@@ -234,6 +234,11 @@ const PropertyCreate = () => {
             {message}
           </div>
         )}
+        {success && (
+          <div className="alert alert-success" role="alert">
+            {success}
+          </div>
+        )}
       </Form>
     </Container>
   );
