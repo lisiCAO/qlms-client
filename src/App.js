@@ -21,6 +21,7 @@ import CheckAuth from "./services/CheckAuth";
 import AboutUs from "./pages/AboutUsPage";
 import LandlordDashBoard from "./pages/landlord/LandlordDashboard"
 import LandlordProfile from "./pages/landlord/LandlordProfile";
+import LeaseView from "./components/tenant/LeaseView";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
             <Route path="properties" element={<PropertyGeneralList />} />
             <Route path="properties/:id" element={<PropertyDetail />} />
             <Route path="apply-lease" element={<LeaseApplication />} />
+            <Route path="view-lease" element={<LeaseView />} />
             <Route path="profile" element={<TenantProfile />} />
             <Route path="*" element={<h1>Not Found</h1>} />
           </Route>
@@ -60,5 +62,6 @@ function App() {
     </Router>
   );
 }
+
 
 export default App;

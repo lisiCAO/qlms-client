@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8000";
+const API_BASE_URL = "http://qlms-server.azurewebsites.net";
 
 const ApiService = {
   /* Auth */
@@ -42,6 +42,23 @@ const ApiService = {
     return data;
   },
 
+  async fetchPropertiesAvailable() {
+    const response = await fetchWithConfig(`${API_BASE_URL}/api/properties/available`, {
+      method: "GET"
+    });
+    const data = await handleResponse(response);
+    return data;
+  },
+
+  async fetchPropertiesTenant() {
+    const response = await fetchWithConfig(`${API_BASE_URL}/api/properties/tenantinfo`, {
+      method: "GET",
+      credentials: 'include',
+    });
+    const data = await handleResponse(response);
+    return data;
+  },
+
   async createProperty(formData) {
     const response = await fetch(`${API_BASE_URL}/api/properties`, {
       method: 'POST',
@@ -52,10 +69,10 @@ const ApiService = {
     return data;
   },
 
-  /* Landlord Dashboard */
-  async fetchLandlordDashboard() {
-    const response = await fetchWithConfig(`${API_BASE_URL}/api/properties/userinfo  `, {
-      method: "GET"
+  async fetchLeaseByTenant() {
+    const response = await fetchWithConfig(`${API_BASE_URL}/api/leases/tenant`, {
+      method: "GET",
+      credentials: 'include',
     });
     const data = await handleResponse(response);
     return data;

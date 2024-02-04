@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Button, Modal, Row, Col } from "react-bootstrap";
 import { FaMoneyBillWave, FaBan, FaFileUpload } from "react-icons/fa";
+import { useAuth } from "../../context/AuthContext";
+import ApiService from "../../services/ApiService";
 
 const TenantDashboard = () => {
+  const { user } = useAuth();
+  const [username, setUsername] = useState("Guest");
+  const [lease, setLease] = useState([]);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showTerminateModal, setShowTerminateModal] = useState(false);
   const [showUploadModal, setShowUploadModal] = useState(false);
@@ -10,6 +15,22 @@ const TenantDashboard = () => {
   const togglePaymentModal = () => setShowPaymentModal(!showPaymentModal);
   const toggleTerminateModal = () => setShowTerminateModal(!showTerminateModal);
   const toggleUploadModal = () => setShowUploadModal(!showUploadModal);
+
+  useEffect(() => {
+    ApiService.fetchLeaseByTenant()
+      .then((data) => {
+        setLease(data);
+  
+        // Move setUsername here
+        if (user?.username) {
+          setUsername(user.username);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching Lease:", error);
+      });
+  }, [user]); // Add user as a dependency to useEffect
+  
 
   return (
     <div>
@@ -36,12 +57,11 @@ const TenantDashboard = () => {
         ></div>
         <div style={{ position: "relative", zIndex: 1 }}>
           <h1 style={{ textAlign: "center", fontWeight: "bold" }}>
-            {/* TODO: replace with tenant name */}
-            Welcome, John Doe
+            Welcome, {[username]} !
           </h1>
           {/* TODO: replace with rental amount and payment due day, if tenant has a lease, otherwise, d-none */}
           <p style={{ textAlign: "center" }}>
-            Your next payment of $1000 is due on 01/01/2022
+            Your next payment of {[lease.rent_amount]} is due on {[lease.payment_due_day]}.
           </p>
         </div>
       </Container>

@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import "./PropertyList.scss";
+import { useNavigate } from 'react-router-dom';
 import ApiService from "../../../services/ApiService";
 import PropertyDetailModal from "./PropertyDetailModal";
-
+import "./PropertyList.scss";
 const PropertyList = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [showDetailModal, setShowDetailModal] = useState(false);
-
+  const navigate = useNavigate();
   const handlePropertyClick = (property) => {
     setSelectedProperty(property);
     console.log("Selected Property:", property);
@@ -19,13 +19,12 @@ const PropertyList = () => {
   };
 
   const handleApplyClick = (e, property) => {
-    e.stopPropagation(); // Stop event propagation to prevent triggering the card click event
-    // Add logic for applying for leasing here, if needed
-    console.log("Apply for leasing:", property);
+    e.stopPropagation(); // Prevent card click event from firing
+    navigate(`/landlord/leases/create?propertyId=${property.id}`);
   };
 
   useEffect(() => {
-    let isMounted = true; // Component is mounted
+    let isMounted = true; 
 
     ApiService.fetchProperties()
       .then((data) => {
@@ -44,7 +43,7 @@ const PropertyList = () => {
       });
 
     return () => {
-      isMounted = false; // Component is unmounted
+      isMounted = false; 
     };
   }, []);
 
@@ -54,7 +53,13 @@ const PropertyList = () => {
   return (
     <div className="properties-list">
       {properties.map((property) => (
-        <Card key={property.id} className={`property-card mb-3 ${selectedProperty?.id === property.id ? "selected-card" : ""}`} onClick={() => handlePropertyClick(property)}>
+        <Card
+          key={property.id}
+          className={`property-card mb-3 ${
+            selectedProperty?.id === property.id ? "selected-card" : ""
+          }`}
+          onClick={() => handlePropertyClick(property)}
+        >
           <Card.Img
             variant="top"
             src={
