@@ -87,7 +87,7 @@ const PropertyList = () => {
             >
               Apply For Leasing
             </Button>
-            {/* Removed View Details Button */
+            {/* Removed View Details Button */}
           </Card.Body>
         </Card>
       ))}
