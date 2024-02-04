@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Carousel, Table, Badge, Container } from "react-bootstrap";
+import { Carousel, Table, Container } from "react-bootstrap";
 import ApiService from "../../services/ApiService";
 
 const PropertyDetail = () => {
