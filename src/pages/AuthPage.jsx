@@ -27,7 +27,7 @@ const AuthPage = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "http://qlms-server.azurewebsites.net/auth/google";
+    window.location.href = "https://qlms-server.azurewebsites.net/auth/google";
     console.log("Google login simulation");
   };
   const { view } = useParams();

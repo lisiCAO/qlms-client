@@ -83,7 +83,7 @@ const TenantNavbar = () => {
                   View Your Property
                 </Link>
                 <Link
-                  to="/tenant/lease"
+                  to="/tenant/view-lease"
                   className="nav-link"
                   style={{ color: "#fff", marginBottom: "10px" }}
                 >

@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://qlms-server.azurewebsites.net";
+const API_BASE_URL = "https://qlms-server.azurewebsites.net";
 
 const ApiService = {
   /* Auth */
