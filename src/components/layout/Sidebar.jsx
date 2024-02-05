@@ -23,7 +23,7 @@ const Sidebar = () => {
   useEffect(() => {
     if (user) {
       setUsername(user.username);
-      setProfileImage(user.profileUrl);
+      setProfileImage(user.profile_picture_url);
     }
   }, [user]);
 
