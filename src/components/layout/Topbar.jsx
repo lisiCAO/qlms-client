@@ -26,7 +26,7 @@ const Topbar = () => {
         style={{ height: "60px" }}
       >
         <Navbar.Brand as={Link} to="/landlord">
-          Dashboard
+          Landlord Portal
         </Navbar.Brand>
         <Form inline={`${true}`} className="ml-auto d-flex align-items-center">
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />

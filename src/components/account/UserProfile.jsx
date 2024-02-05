@@ -16,7 +16,6 @@ const UserProfile = () => {
       setUserData(data);
       setError("");
     } catch (error) {
-      console.error("Error fetching user data:", error);
       setError("Failed to fetch user data");
     } finally {
       setLoading(false);

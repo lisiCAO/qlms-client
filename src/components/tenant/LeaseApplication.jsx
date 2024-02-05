@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useLocation } from "react-router-dom";
 import ApiService from "../../services/ApiService";
+import { useUnloadMessage } from "../hooks/useUnloadMessage";
 
 const LeaseApplication = () => {
   const location = useLocation();
@@ -24,6 +25,10 @@ const LeaseApplication = () => {
   });
   const [dateError, setDateError] = useState("");
   const [validated, setValidated] = useState(false);
+  const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState("");
+
+  useUnloadMessage(setMessage, setSuccess);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,13 +61,14 @@ const LeaseApplication = () => {
     if (form.checkValidity() === false || dateError) {
       e.stopPropagation();
     } else {
-      console.log(lease);
       try {
         const response = await ApiService.createLease(lease);
-        console.log("response:", response);
         // Handle success
+        setSuccess("Lease created successfully");
+        setMessage(null);
       } catch (error) {
-        console.error("Error:", error);
+        setMessage(error.message || "Failed to create lease");
+        setSuccess(null);
       }
     }
   };
@@ -194,7 +200,21 @@ const LeaseApplication = () => {
             onChange={handleChange}
           />
         </Form.Group>
-
+        {message && (
+          <Row>
+            <Col>
+              <Alert variant={success ? "success" : "danger"}>{message}</Alert>
+            </Col>
+          </Row>
+        )}
+        {success && (
+          <Row>
+            <Col>
+              <Alert variant="success">{success}</Alert>
+            </Col>
+          </Row>
+        )
+        }
         {dateError && (
           <Row>
             <Col>

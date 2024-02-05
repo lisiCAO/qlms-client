@@ -9,6 +9,7 @@ const LeaseList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedLease, setSelectedLease] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     // API call to fetch leases
@@ -52,13 +53,9 @@ const LeaseList = () => {
         lease.lease_id,
         updatedLease
       );
-      console.log("Lease renewed successfully", response.data);
 
-      // Update leases state
-      // fetchLeases();
     } catch (error) {
       console.error("Failed to renew lease:", error);
-      // Show error message
     }
   };
 

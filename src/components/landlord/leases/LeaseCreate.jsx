@@ -8,9 +8,9 @@ import ApiService from "../../../services/ApiService";
 const LeaseCreate = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const propertyId = searchParams.get("propertyId") || "";  // 如果没有propertyId，则默认为空字符串
+  const propertyId = searchParams.get("propertyId") || "";  
   const [lease, setLease] = useState({
-    property_id: propertyId,  // 使用propertyId初始化，即使它是空字符串
+    property_id: propertyId,  
     tenant_user_id: "",
     start_date: new Date(),
     end_date: new Date(),
@@ -24,7 +24,6 @@ const LeaseCreate = () => {
   });
   const [dateError, setDateError] = useState("");
   const [validated, setValidated] = useState(false);
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,7 +44,7 @@ const LeaseCreate = () => {
     } else if (fieldName === "end_date" && date < lease.start_date) {
       setDateError("End date cannot be earlier than start date.");
     } else {
-      setDateError(""); // Clear error message
+      setDateError(""); 
     }
   };
 
@@ -57,20 +56,13 @@ const LeaseCreate = () => {
     if (form.checkValidity() === false || dateError) {
       e.stopPropagation();
     } else {
-      console.log(lease);
-      // Submit logic here
+      try {
+        await ApiService.createLease(lease);
+      } catch (error) {
+        console.error("Error creating lease:", error);
+      }
     }
 
-    try {
-      // Send the FormData object to the backend using the API service
-      const response = await ApiService.createLease(lease);
-      // TODO: Handle the response
-      console.log("response:", response);
-      //setMessage(response.message);
-      // Handle success
-    } catch (error) {
-      console.error("Error:", error);
-    }
   };
   return (
     <Container fluid>

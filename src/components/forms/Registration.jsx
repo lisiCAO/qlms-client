@@ -53,7 +53,7 @@ const Registration = () => {
     role: "",
   });
   const [message, setMessage] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState("");
 
   useUnloadMessage(setMessage, setSuccess);
 
@@ -96,12 +96,12 @@ const Registration = () => {
 
       // Send user data to API
       const response = await ApiService.register(userData);
-
-      console.log(response);
-      setMessage("Account created successfully: " + response.username);
+      setSuccess("Account created successfully: " + response.username);
+      setMessage(null);
       navigate("/login"); // Redirect to login page
     } catch (error) {
       setMessage(error.message || "Failed to register.");
+      setSuccess(null);
     }
   };
 

@@ -80,7 +80,6 @@ const AccountProfileDetails = ({ userData }) => {
 
       try {
         const response = await ApiService.updateProfile(userData.id, values);
-        console.log(response);
         setSuccess("User data updated successfully");
       } catch (error) {
         setMessage(error.message || "Failed to update user data");

@@ -2,82 +2,79 @@ import React, { useState, useEffect } from "react";
 import { Carousel, Table, Container } from "react-bootstrap";
 import ApiService from "../../services/ApiService";
 
-const PropertyDetail = () => {
-  const [property, setProperty] = useState(null);
-  const [photos, setPhotos] = useState([]);
+const PropertyDetails = () => {
+  const [properties, setProperties] = useState([]);
 
   useEffect(() => {
-    const fetchProperty = async () => {
+    const fetchProperties = async () => {
       try {
         const data = await ApiService.fetchPropertiesTenant();
-        setProperty(data);
+        setProperties(data.propertiesResult);
       } catch (error) {
-        console.error("Error fetching Property:", error);
+        console.error("Error fetching properties:", error);
       }
     };
 
-    fetchProperty();
+    fetchProperties();
   }, []);
-
-  useEffect(() => {
-    const fetchPhotos = async () => {
-      try {
-        if (property && property.photos_url) {
-          const response = await fetch(`${property.photos_url}`);
-          const data = await response.json();
-          setPhotos(data);
-        }
-      } catch (error) {
-        console.error("Error fetching photos:", error);
-      }
-    };
-
-    fetchPhotos();
-  }, [property]);
 
   return (
     <Container fluid>
-    <div>
-      <h1>Property Detail</h1>
-
-      {property ? (
-        <>
-          {photos.length > 0 ? (
-            <Carousel>
-              {photos.map((photo, index) => (
-                <Carousel.Item key={index}>
-                  <img
-                    className="d-block w-100"
-                    src={photo.image_url}
-                    alt={photo.description}
-                  />
-                  <Carousel.Caption>
-                    <p>{photo.description}</p>
-                  </Carousel.Caption>
-                </Carousel.Item>
-              ))}
-            </Carousel>
-          ) : (
-            <p>No photos available</p>
-          )}
-
-          <Table responsive="sm">
-            <tbody>
-              <tr>
-                <td>Property Type</td>
-                <td>{property.property_type}</td>
-              </tr>
-              {/* Continue with other property details */}
-            </tbody>
-          </Table>
-        </>
+      <h1>Property Details</h1>
+      {properties.length > 0 ? (
+        properties.map((property, index) => (
+          <div key={index} className="property-detail-section">
+            <h2>{property.address}</h2>
+            {property.image_urls && property.image_urls.length > 0 && (
+              <Carousel>
+                {property.image_urls.map((url, idx) => (
+                  <Carousel.Item key={idx}>
+                    <img className="d-block w-100" src={url} alt={`Property image ${idx + 1}`} />
+                  </Carousel.Item>
+                ))}
+              </Carousel>
+            )}
+            <Table responsive="sm">
+              <tbody>
+                <tr>
+                  <td>Property Type</td>
+                  <td>{property.type}</td>
+                </tr>
+                <tr>
+                  <td>Number of Units</td>
+                  <td>{property.number_of_units}</td>
+                </tr>
+                <tr>
+                  <td>Size (sq ft)</td>
+                  <td>{property.size_in_sq_ft}</td>
+                </tr>
+                <tr>
+                  <td>Amenities</td>
+                  <td>{property.amenities}</td>
+                </tr>
+                <tr>
+                  <td>Lease Terms</td>
+                  <td>{property.lease_terms}</td>
+                </tr>
+                <tr>
+                  <td>Rental Price</td>
+                  <td>${property.rental_price}</td>
+                </tr>
+                <tr>
+                  <td>Year Built</td>
+                  <td>{property.year_built}</td>
+                </tr>
+              </tbody>
+            </Table>
+          </div>
+        ))
       ) : (
-        <p>No property selected</p>
+        <p>No properties available</p>
       )}
-    </div>
     </Container>
   );
 };
 
-export default PropertyDetail;
+export default PropertyDetails;
+
 

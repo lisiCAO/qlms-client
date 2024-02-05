@@ -15,7 +15,6 @@ export const AuthProvider = ({ children }) => {
         const currentUser = await ApiService.fetchCurrentUser();
         setUser(currentUser);
       } catch (error) {
-        console.error('Failed to fetch current user:', error);
         setUser(null);
       } finally {
         setIsAuthInitialized(true);
@@ -23,6 +22,15 @@ export const AuthProvider = ({ children }) => {
     };
     initializeAuth();
   }, []);
+  
+  const updateUser = async () => {
+    try {
+      const updatedUser = await ApiService.fetchCurrentUser(); 
+      setUser(updatedUser);
+    } catch (error) {
+      setUser(null);
+    }
+  };
 
   const value = useMemo(() => ({
     user,
@@ -30,7 +38,6 @@ export const AuthProvider = ({ children }) => {
     login: async (credentials) => {
       try {
         const response = await ApiService.login(credentials);
-        console.log('Login response:', response);
         setUser(response);
         return response;
       } catch (error) {
@@ -43,11 +50,11 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
         return response;
       } catch (error) {
-        console.error('Logout failed:', error);
         throw error;
       }
     },
     isLoggedIn: !!user,
+    updateUser
   }), [user, isAuthInitialized]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

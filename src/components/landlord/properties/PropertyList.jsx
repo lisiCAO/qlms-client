@@ -14,7 +14,6 @@ const PropertyList = () => {
   const navigate = useNavigate();
   const handlePropertyClick = (property) => {
     setSelectedProperty(property);
-    console.log("Selected Property:", property);
     setShowDetailModal(true);
   };
 
@@ -34,10 +33,8 @@ const PropertyList = () => {
         }
       })
       .catch((error) => {
-        console.error("Error fetching properties:", error);
         if (isMounted) {
           setMessage("Failed to fetch properties.");
-
           setLoading(false);
         }
       });

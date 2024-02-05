@@ -113,7 +113,6 @@ const PropertyCreate = () => {
   const handlePreviousStep = () => {
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
-      console.log("currentStep:", currentStep);
     }
   };
 
@@ -121,14 +120,10 @@ const PropertyCreate = () => {
     e.preventDefault();
     const data = new FormData();
 
-    console.log("formdata:", formData);
-
     // Append text fields to the FormData object
     for (const key in formData) {
       data.append(key, formData[key]);
     }
-
-    console.log("data:", data);
 
     // Append files to the FormData object
     for (const key in files) {
@@ -138,12 +133,10 @@ const PropertyCreate = () => {
     try {
       // Send the FormData object to the backend using the API service
       const response = await ApiService.createProperty(data);
-      // TODO: Handle the response
-      console.log("response:", response);
-      //setMessage(response.message);
-      // Handle success
+      setSuccess(`Property created successfully: ${response.address}`);
+      setMessage(null);
     } catch (error) {
-      console.error("Error:", error);
+      setSuccess(null);
       setMessage(error.message);
     }
   };
@@ -157,11 +150,9 @@ const PropertyCreate = () => {
         {steps[currentStep].map((fieldName) => {
           const field = propertyFormConfig.find((f) => f.name === fieldName);
           if (!field) {
-            console.error(`Field not found: ${fieldName}`);
             return null;
           }
           return (
-            // Added return statement here
             <Form.Group key={field.name} controlId={field.name}>
               <Form.Label>{field.label}</Form.Label>
               {field.type === "select" ? (
@@ -184,7 +175,7 @@ const PropertyCreate = () => {
                   onChange={handleInputChange}
                   rows={3}
                 />
-              ) : field.type === "file" ? ( // changed 'image' to 'file' to match the input type
+              ) : field.type === "file" ? ( 
                 <Form.Control
                   type="file"
                   name={field.name}

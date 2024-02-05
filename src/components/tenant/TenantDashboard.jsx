@@ -3,6 +3,7 @@ import { Container, Button, Modal, Row, Col } from "react-bootstrap";
 import { FaMoneyBillWave, FaBan, FaFileUpload } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
 import ApiService from "../../services/ApiService";
+import { useUnloadMessage } from "../hooks/useUnloadMessage";
 
 const TenantDashboard = () => {
   const { user } = useAuth();
@@ -11,12 +12,16 @@ const TenantDashboard = () => {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showTerminateModal, setShowTerminateModal] = useState(false);
   const [showUploadModal, setShowUploadModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState("");
 
   const togglePaymentModal = () => setShowPaymentModal(!showPaymentModal);
   const toggleTerminateModal = () => setShowTerminateModal(!showTerminateModal);
   const toggleUploadModal = () => setShowUploadModal(!showUploadModal);
 
+  useUnloadMessage(setMessage);
   useEffect(() => {
+    setLoading(true);
     ApiService.fetchLeaseByTenant()
       .then((data) => {
         setLease(data);
@@ -25,13 +30,17 @@ const TenantDashboard = () => {
         if (user?.username) {
           setUsername(user.username);
         }
+        setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching Lease:", error);
+        setMessage("Failed to fetch lease details.");
+        setLoading(false);
       });
   }, [user]); // Add user as a dependency to useEffect
   
-
+  if (loading) return <div>Loading lease details...</div>;
+  if (message) return <div>Error fetching lease details: {message}</div>;
+  
   return (
     <div>
       <Container

@@ -5,8 +5,12 @@ import { Link } from "react-router-dom";
 
 const TenantsList = () => {
   const [tenants, setTenants] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
+    setLoading(true);
+
     ApiService.fetchTenants()
       .then((data) => {
         const updatedTenants = data.propertiesResult.map((tenant) => {
@@ -23,13 +27,17 @@ const TenantsList = () => {
             status,
           };
         });
-
         setTenants(updatedTenants);
+        setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching Tenants:", error);
+        setMessage("Failed to fetch tenants.");
+        setLoading(false);
       });
   }, []);
+
+  if (loading) return <div>Loading tenants...</div>;
+  if (message) return <div>Error fetching tenants: {message}</div>;
 
   return (
     <Container fluid>

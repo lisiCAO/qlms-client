@@ -7,8 +7,6 @@ const CheckAuth = () => {
   if (!isAuthInitialized) {
     return null; //  <LoadingIndicator />
   }
-  console.log('User:', user);
-  console.log('User role:', user?.role);
   if (!user) {
     return <Navigate to="/auth" replace />;
   }

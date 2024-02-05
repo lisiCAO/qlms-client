@@ -16,13 +16,11 @@ const PropertyGeneralList = () => {
 
   const handlePropertyClick = (property) => {
     setSelectedProperty(property);
-    console.log("Selected Property:", property);
     setShowDetailModal(true);
   };
 
   const handleApplyClick = (e, property) => {
-    e.stopPropagation(); // Stop event propagation to prevent triggering the card click event
-    // Add logic for applying for leasing here, if needed
+    e.stopPropagation(); 
     navigate(`/tenant/apply-lease?propertyId=${property.id}`);
   };
 
@@ -37,7 +35,6 @@ const PropertyGeneralList = () => {
         }
       })
       .catch((error) => {
-        console.error("Error fetching properties:", error);
         if (isMounted) {
           setMessage("Failed to fetch properties.");
           setLoading(false);
