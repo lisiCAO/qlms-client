@@ -197,7 +197,7 @@ const fetchWithConfig = (url, options = {}) => {
 const handleResponse = async (response) => {
   if (!response.ok && (response.status === 401 || response.status === 403)) {
     ApiService.logout().finally(() => {
-      window.location.href = "/auth";
+      window.location.href = "/";
     });
   }
   const contentType = response.headers.get("Content-Type");
