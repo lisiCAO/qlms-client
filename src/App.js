@@ -35,7 +35,7 @@ function App() {
         <Route element={<ProtectedRoute role="tenant" />}>
           <Route path="/tenant/*" element={<TenantLayout />}>
             <Route index element={<TenantDashboard />} />
-            <Route path="/dashboard" element={<TenantDashboard />} />
+            <Route path="dashboard" element={<TenantDashboard />} />
             <Route path="properties" element={<PropertyGeneralList />} />
             <Route path="properties/:id" element={<PropertyDetail />} />
             <Route path="apply-lease" element={<LeaseApplication />} />
@@ -48,7 +48,7 @@ function App() {
         <Route element={<ProtectedRoute role="landlord" />}>
           <Route path="/landlord/*" element={<LandlordLayout />}>
             <Route index element={<LandlordDashBoard />} />
-            <Route path="/dashboard" element={<LandlordDashBoard />} />
+            <Route path="dashboard" element={<LandlordDashBoard />} />
             <Route path="properties/*" element={<PropertyPage />} />
             <Route path="leases/*" element={<LeasePage />} />
             <Route path="tenants/*" element={<LandlordTenantPage />} />
