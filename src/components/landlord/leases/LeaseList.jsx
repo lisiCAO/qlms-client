@@ -10,16 +10,20 @@ const LeaseList = () => {
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedLease, setSelectedLease] = useState(null);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
-    // API call to fetch leases
-    // fetchLeases();
+    setLoading(true);
     ApiService.fetchLeases()
       .then((data) => {
         setLeases(data);
+        setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching Leases:", error);
+        setError(`Failed to fetch leases: ${error}`);
+        setLoading(false);
       });
   }, []);
 
@@ -31,33 +35,47 @@ const LeaseList = () => {
   const handleCloseDetailModal = () => {
     setShowDetailModal(false);
   };
-  // TODO: Implement renewLease function
+
   const renewLease = async (e, lease) => {
     e.stopPropagation();
 
-    // Calculate new end date
     const startDate = dayjs(lease.start_date);
     const endDate = dayjs(lease.end_date);
     const leaseDuration = endDate.diff(startDate);
     const newEndDate = endDate.add(leaseDuration, "millisecond");
 
-    // Create updated lease object
     const updatedLease = {
       ...lease,
       end_date: newEndDate.format("YYYY-MM-DD"),
     };
 
     try {
-      // Call API to update lease
-      const response = await ApiService.updateLease(
+      await ApiService.updateLease(
         lease.lease_id,
         updatedLease
       );
-
+      setSuccessMessage('Lease has been successfully renewed.'); 
+      setShowSuccessModal(true);
+      // Refresh lease list
+      const data = await ApiService.fetchLeases();
+      setLeases(data);
     } catch (error) {
-      console.error("Failed to renew lease:", error);
+      console.error("Failed to renew lease", error);
     }
   };
+
+  const deleteLease = async (e, leaseId) => {
+    e.stopPropagation();
+    try {
+      const response = await ApiService.deleteLease(leaseId);
+      setSuccessMessage(response); 
+      setShowSuccessModal(true);
+      setLeases(leases.filter((lease) => lease.id !== leaseId));
+    } catch (error) {
+      console.error("Failed to delete lease:", error);
+      // Show error message
+    }
+  }
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -68,6 +86,9 @@ const LeaseList = () => {
       lease.property_id.toString().includes(searchTerm) ||
       lease.tenant_user_id.toString().includes(searchTerm)
   );
+
+  if (loading) return <div>Loading leases...</div>;
+  if (error) return <div>Error fetching leases: {error}</div>;
 
   return (
     <div>
@@ -92,7 +113,7 @@ const LeaseList = () => {
         </thead>
         <tbody>
           {filteredLeases.map((lease) => (
-            <tr key={lease.lease_id} onClick={() => handleLeaseClick(lease)}>
+            <tr key={lease.id} onClick={() => handleLeaseClick(lease)}>
               <td>{lease.property_id}</td>
               <td>{dayjs(lease.start_date).format("MM/DD/YYYY")}</td>
               <td>{dayjs(lease.end_date).format("MM/DD/YYYY")}</td>
@@ -102,13 +123,12 @@ const LeaseList = () => {
                 <Button
                   variant="primary"
                   onClick={(e) => {
-                    e.stopPropagation();
-                    renewLease(lease);
+                    renewLease(e, lease);
                   }}
                 >
                   Renew Lease
                 </Button>
-                <Button variant="danger" onClick={(e) => e.stopPropagation()}>
+                <Button variant="danger"  onClick={(e) => deleteLease(e, lease.id)} style={{ marginLeft: '10px' }}>
                   End Lease
                 </Button>
               </td>
@@ -183,6 +203,17 @@ const LeaseList = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseDetailModal}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Success</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{successMessage}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowSuccessModal(false)}>
             Close
           </Button>
         </Modal.Footer>

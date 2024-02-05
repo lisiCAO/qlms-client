@@ -64,7 +64,7 @@ const LeaseApplication = () => {
       try {
         const response = await ApiService.createLease(lease);
         // Handle success
-        setSuccess("Lease created successfully");
+        setSuccess(`Lease created successfully with ID: ${response.id}`);
         setMessage(null);
       } catch (error) {
         setMessage(error.message || "Failed to create lease");

@@ -151,6 +151,23 @@ const ApiService = {
     return data;
   },
 
+  async updateLease(leaseId, lease) {
+    const response = await fetchWithConfig(`${API_BASE_URL}/api/leases/${leaseId}`, {
+      method: "PUT",
+      body: JSON.stringify(lease),
+    });
+    const data = await handleResponse(response);
+    return data;
+  },
+
+  async deleteLease(leaseId) {
+    const response = await fetchWithConfig(`${API_BASE_URL}/api/leases/${leaseId}`, {
+      method: "DELETE",
+    });
+    const message = await response.json().message;
+    return message;
+  },
+
   /* Upload Image */
   async uploadImage(formData) {
     const response = await fetch(`${API_BASE_URL}/api/users/uploadimage`, {

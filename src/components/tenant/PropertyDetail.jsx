@@ -29,7 +29,7 @@ const PropertyDetails = () => {
               <Carousel>
                 {property.image_urls.map((url, idx) => (
                   <Carousel.Item key={idx}>
-                    <img className="d-block w-100" src={url} alt={`Property image ${idx + 1}`} />
+                    <img className="d-block w-100" src={url} alt={`View ${idx + 1} of the property`} />
                   </Carousel.Item>
                 ))}
               </Carousel>
