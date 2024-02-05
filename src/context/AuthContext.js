@@ -14,7 +14,6 @@ export const AuthProvider = ({ children }) => {
       try {
         const currentUser = await ApiService.fetchCurrentUser();
         setUser(currentUser);
-        window.location.href = "/";
       } catch (error) {
         setUser(null);
       } finally {
