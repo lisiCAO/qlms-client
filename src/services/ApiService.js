@@ -195,6 +195,11 @@ const fetchWithConfig = (url, options = {}) => {
 };
 
 const handleResponse = async (response) => {
+  if (!response.ok && (response.status === 401 || response.status === 403)) {
+    ApiService.logout().finally(() => {
+      window.location.href = "/auth";
+    });
+  }
   const contentType = response.headers.get("Content-Type");
   if (contentType && contentType.includes("application/json")) {
     const data = await response.json();
